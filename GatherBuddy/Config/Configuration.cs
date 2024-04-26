@@ -43,6 +43,9 @@ public partial class Configuration : IPluginConfiguration
     public bool             MainWindowLockResize   { get; set; } = false;
     public bool             CloseOnEscape          { get; set; } = true;
     public bool             UseGearChange          { get; set; } = true;
+    public bool             MountOnTeleport        { get; set; } = true;
+    public bool             UseMountRoulette       { get; set; } = true;
+    public string           UseSetMount            { get; set; } = "Company Chocobo";
     public bool             UsePenumbraCollection  { get; set; } = true;
     public bool             UseTeleport            { get; set; } = true;
     public bool             UseCoordinates         { get; set; } = true;

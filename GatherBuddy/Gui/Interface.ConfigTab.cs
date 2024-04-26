@@ -98,6 +98,16 @@ public partial class Interface
                 "Toggle whether to automatically switch gear to the correct job gear for a node.\nUses Miner Set, Botanist Set and Fisher Set.",
                 GatherBuddy.Config.UseGearChange, b => GatherBuddy.Config.UseGearChange = b);
 
+        public static void DrawMountBox()
+            => DrawCheckbox("Enable Mounting",
+                "Toggle whether to automatically mount.",
+                GatherBuddy.Config.MountOnTeleport, b => GatherBuddy.Config.MountOnTeleport = b);
+
+        public static void DrawMountRouletteBox()
+            => DrawCheckbox("Use Mount Roulette",
+                "Toggle whether to use Mount Roulette for Mount on Teleport",
+                GatherBuddy.Config.UseMountRoulette, b => GatherBuddy.Config.UseMountRoulette = b);
+
         public static void DrawPenumbraCollectionBox()
             => DrawCheckbox("Enable Penumbra Collection Change",
                 "Toggle whether to automatically switch Penumbra Collections on gear change.\nUses Default set unless otherwise overridden.",
@@ -513,6 +523,12 @@ public partial class Interface
                 "Keep empty to have no chat output.\nCan replace:\n- {Input} with the entered search text.\n- {Item} with the item link.",
                 GatherBuddy.Config.IdentifiedGatherableFormat, Configuration.DefaultIdentifiedGatherableFormat,
                 s => GatherBuddy.Config.IdentifiedGatherableFormat = s);
+
+        public static void DrawSetMountInput()
+            => DrawFormatInput("Set Mount",
+                "Set a specific mount to use instead of using Roulette", 
+                GatherBuddy.Config.UseSetMount, 
+                Configuration.DefaultMount, s => GatherBuddy.Config.UseSetMount = s);
     }
 
     private void DrawConfigTab()
@@ -535,6 +551,11 @@ public partial class Interface
             {
                 ConfigFunctions.DrawPreferredJobSelect();
                 ConfigFunctions.DrawGearChangeBox();
+                ConfigFunctions.DrawMountBox();
+                if (GatherBuddy.Config.MountOnTeleport) { 
+                    ConfigFunctions.DrawMountRouletteBox();
+                    if (!GatherBuddy.Config.UseMountRoulette) { ConfigFunctions.DrawSetMountInput(); }
+                }
                 ConfigFunctions.DrawTeleportBox();
                 ConfigFunctions.DrawMapOpenBox();
                 ConfigFunctions.DrawPlaceMarkerBox();
